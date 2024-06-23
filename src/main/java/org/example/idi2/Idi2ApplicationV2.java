@@ -34,14 +34,24 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
     public void run(String... args) throws Exception {
         Estado estado = new Estado();
         Scanner scanner = new Scanner(System.in);
-        int seleccion;
+
+      
 
         System.out.println("Bienvenido a nuestro E-Commerce");
 
         while (true) {
             Extra.imprimirMenu(estado.isSesionIniciada());
             System.out.print("Seleccione una opción: ");
-            seleccion = Integer.parseInt(scanner.nextLine());
+            int seleccion = -1;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    seleccion = Integer.parseInt(scanner.nextLine());
+                    validInput = true; // Exit loop if parsing is successful
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, ingrese un número válido.");
+                }
+            }
 
             switch (seleccion) {
 
@@ -73,6 +83,12 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
                 case 5:
                     System.out.println("Saliendo del programa");
                     return;
+
+            
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción del 1 al 5.");
+                    break;
+          
             }
         }
     }
@@ -193,7 +209,7 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
 
     // -------------------------Ver carrito - Submenu------------------------------//
     public void submenuCarrito(Estado estado, Scanner scanner) {
-        int decision, agregarEliminar, cantidad; Long productoId;
+        int  agregarEliminar, cantidad; Long productoId;
         while (true) {
             System.out.println("Acciones: ");
 
@@ -204,7 +220,16 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
 
             System.out.println("Seleccione una opción: ");
 
-            decision = Integer.parseInt(scanner.nextLine());
+            int decision = -1;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    decision = Integer.parseInt(scanner.nextLine());
+                    validInput = true; // Exit loop if parsing is successful
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, ingrese un número válido.");
+                }
+            }
             switch (decision) {
                 case 1:
                     //EliminarProducto
@@ -246,6 +271,9 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
                     break;
                 case 4:
                     return;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción del 1 al 4.");
+                    break;
             }
 
         }
@@ -280,7 +308,7 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
 
     // -------------------------Submenu mi perfil------------------------------//
     public void miPerfil(Estado estado, Scanner scanner) {
-        System.out.println("Mi perfil: "); int eleccion;
+        System.out.println("Mi perfil: "); 
 
         while (true) {
             System.out.println(
@@ -293,8 +321,16 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
                     "4- Volver atras"
             );
             System.out.print("Seleccionar opcion: ");
-            eleccion = Integer.parseInt(scanner.nextLine());
-
+            int eleccion = -1;
+            boolean validInput = false;
+            while (!validInput) {
+                try {
+                    eleccion = Integer.parseInt(scanner.nextLine());
+                    validInput = true; // Exit loop if parsing is successful
+                } catch (NumberFormatException e) {
+                    System.out.println("Por favor, ingrese un número válido.");
+                }
+            }
             switch (eleccion) {
                 case 1:
                     verPedidos(estado);
@@ -307,6 +343,9 @@ public class Idi2ApplicationV2 implements CommandLineRunner{
                     break;
                 case 4:
                     return;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione una opción del 1 al 4.");
+                    break;
 
             }
         }
